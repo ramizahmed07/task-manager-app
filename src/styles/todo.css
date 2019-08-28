@@ -1,0 +1,53 @@
+.todo-container{
+    width: 55%;
+    margin: 0 auto;
+}
+
+.todo-container h1{
+    text-align: center;
+    font-size: 60px;
+    font-family: sans-serif;
+}
+
+.add-button{
+    margin-top: 30px;
+    text-align: center
+}
+
+.how-to{
+    margin-top: 40px;
+    text-align: center;
+    font-size: 12px;
+    color: rgb(187, 187, 187);
+}
+
+.content-container{
+    min-width: 85%;
+}
+
+.button-container{
+    min-width: 15%;
+}
+.update-input{
+    border: 1px solid #d2d2d2;
+    padding: 0 5px;
+}
+
+.edit-button, .delete-button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    
+}
+
+.edit-icon, .delete-icon{
+    font-size: 20px;
+}
+
+.delete-icon{
+    color: red;
+}
+
+.edit-icon{
+    color: green;
+}
