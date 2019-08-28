@@ -21,7 +21,7 @@ class Login extends Component {
                         <span><Checkbox>Remember me</Checkbox></span>
                     </div>
                     <div className="buttonContainer">
-                        <Button class="login" type="primary"><Link to="/todo" className="links">Login</Link></Button>
+                        <Button className="login" type="primary"><Link to="/todo" className="links">Login</Link></Button>
                     </div>
 
                     <div className="signUp">
