@@ -29,7 +29,10 @@ class ShowTodos extends Component {
         e.preventDefault();
         const { content, currentTodo } = this.state;
         this.props.updateTodo(currentTodo, content);
-        this.setState({ editing: false, content: '', currentTodo: '' })
+        this.setState({
+            content: "",
+            editing: false
+        })
     };
 
     render() {

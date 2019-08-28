@@ -1,18 +1,18 @@
-.container{
-    height: 75vh;
+.signup-container{
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container form{
+.signup-container form{
     text-align: center;
     border: 1px solid #d2d2d2;
     padding: 15px 30px;
     border-radius: 6px;
 }
 
-.container h1{
+.signup-container h1{
     margin: 20px 0;
     color: #6e6e6e;
     font-size: 25px;
@@ -20,46 +20,13 @@
     text-transform: uppercase;
 }
 
-form div{
-    margin-bottom: 8px;
-}
-
-.checkbox{
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-.checkbox span{
-    font-size: 12px;
-    color: #b2b2b3;
-    text-align: center;
-}
-
-.login, .signup{
-    width: 100%;
-}
-
-.signUp{
-    color: #b2b2b2;
-    font-size: 12px;
-    margin-top: 60px;
-}
-
-.signUpLink, .signUpLink:hover, .signUpLink:active{
-    text-decoration: underline;
-}
-
-
-/* -------- MEDIA QUERIES --------- */
-
-
 @media screen and (max-width: 600px) {
     
-    .container h1{
+    .signup-container h1{
         font-size: 18px;
     }
 
-    .container form{
+    .signup-container form{
         padding: 7px 15px;
     }
     
@@ -76,9 +43,5 @@ form div{
         margin-top: 30px;
         font-size: 10px;
     }
-
-}
-
-@media screen and (min-width: 600px) {
 
 }

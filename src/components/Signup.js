@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Input, Button } from 'antd';
 import {Link} from 'react-router-dom';
-import '../styles/login.css';
+import '../styles/signup.css';
 
 class Signup extends Component {
     
     render(){
         return(
-            <div className="container">
+            <div className="signup-container">
                 <form>
                     <h1>Sign Up</h1>
                     <div>
@@ -26,10 +26,10 @@ class Signup extends Component {
                         <Input className="input" placeholder="Number" />
                     </div>
                     <div className="buttonContainer">
-                        <Button type="primary"><Link to="/" className="links">Sign up</Link></Button>
+                        <Button type="primary" className="signup"><Link to="/" className="links">Sign up</Link></Button>
                     </div>
-                    <div>
-                        Already a member <Link to="/">Login here</Link>
+                    <div className="signUp">
+                        Already a member <Link to="/" className="signUpLink">Login here</Link>
                     </div>
                 </form>
             </div>

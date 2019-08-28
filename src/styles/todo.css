@@ -1,5 +1,5 @@
 .todo-container{
-    width: 55%;
+    width: 85%;
     margin: 0 auto;
 }
 
@@ -50,4 +50,40 @@
 
 .edit-icon{
     color: green;
+}
+
+
+/* ------- MEDIA QUERIES ------ */
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 600px) {
+    
+    .todo-container{
+        width: 70%;
+    }
+
+    .todo-container h1{
+        font-size: 30px;
+    }
+
+    .content-container{
+        max-width: 80%;
+        font-size: 12px;
+    }
+
+    .edit-icon, .delete-icon{
+        font-size: 13px;
+    }
+}
+
+@media only screen and (min-device-width : 1000px) {
+    
+    .content-container{
+        min-width: 89%;
+        font-size: 12px;
+    }
+
+    .button-container{
+        min-width: 10%;
+    }
 }
