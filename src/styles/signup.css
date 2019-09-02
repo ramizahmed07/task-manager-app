@@ -1,47 +1,17 @@
-.signup-container{
+.container{
     height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.signup-container form{
+.container form{
     text-align: center;
     border: 1px solid #d2d2d2;
     padding: 15px 30px;
     border-radius: 6px;
 }
 
-.signup-container h1{
-    margin: 20px 0;
-    color: #6e6e6e;
-    font-size: 25px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-@media screen and (max-width: 600px) {
-    
-    .signup-container h1{
-        font-size: 18px;
-    }
-
-    .signup-container form{
-        padding: 7px 15px;
-    }
-    
-    form div{
-        margin-bottom: 6px;
-    }
-
-    .checkbox{
-        text-align: left;
-        margin-bottom: 7px;
-    }
-
-    .signUp{
-        margin-top: 30px;
-        font-size: 10px;
-    }
-
+.signup-button{
+    margin-right: 80px;
 }
