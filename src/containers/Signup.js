@@ -1,26 +1,29 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { setAuthToken } from "../utils";
 import "../styles/signup.css";
-import {
-  Form,
-  Input,
-  Button,
-  AutoComplete
-} from "antd";
-
-const AutoCompleteOption = AutoComplete.Option;
+import { Form, Input, InputNumber, Button } from "antd";
 
 class RegistrationForm extends Component {
   state = {
-    confirmDirty: false,
-    autoCompleteResult: []
+    confirmDirty: false
   };
 
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        axios
+          .post("https://node-task-manager-app.herokuapp.com/api/users", values)
+          .then(response => {
+            localStorage.setItem("JWT_token", response.data.token);
+            setAuthToken(response.data.token);
+            this.props.history.push("/todo");
+          })
+          .catch(err => {
+            console.log({ err });
+          });
       }
     });
   };
@@ -47,21 +50,8 @@ class RegistrationForm extends Component {
     callback();
   };
 
-  handleWebsiteChange = value => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = [".com", ".org", ".net"].map(
-        domain => `${value}${domain}`
-      );
-    }
-    this.setState({ autoCompleteResult });
-  };
-
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { autoCompleteResult } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -87,16 +77,23 @@ class RegistrationForm extends Component {
       }
     };
 
-    const websiteOptions = autoCompleteResult.map(website => (
-      <AutoCompleteOption key={website}>{website}</AutoCompleteOption>
-    ));
-
     return (
       <div className="container">
         <Form {...formItemLayout} onSubmit={this.handleSubmit}>
           <h1>Sign Up</h1>
 
-          <Form.Item label="E-mail">
+          <Form.Item label="Name: " hasFeedback>
+            {getFieldDecorator("name", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please input your Name"
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
+
+          <Form.Item label="E-mail" hasFeedback>
             {getFieldDecorator("email", {
               rules: [
                 {
@@ -110,6 +107,7 @@ class RegistrationForm extends Component {
               ]
             })(<Input />)}
           </Form.Item>
+
           <Form.Item label="Password" hasFeedback>
             {getFieldDecorator("password", {
               rules: [
@@ -119,10 +117,12 @@ class RegistrationForm extends Component {
                 },
                 {
                   validator: this.validateToNextPassword
-                }
+                },
+                { min: 8, message: "Password must be above 8 words" }
               ]
             })(<Input.Password />)}
           </Form.Item>
+
           <Form.Item label="Confirm: " hasFeedback>
             {getFieldDecorator("confirm", {
               rules: [
@@ -137,12 +137,26 @@ class RegistrationForm extends Component {
             })(<Input.Password onBlur={this.handleConfirmBlur} />)}
           </Form.Item>
 
+          <Form.Item label="Age: ">
+            {getFieldDecorator("age", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please input your Age"
+                }
+              ]
+            })(<InputNumber min={0} />)}
+          </Form.Item>
+
           <Form.Item {...tailFormItemLayout}>
             <Button className="signup-button" type="primary" htmlType="submit">
               Sign up
             </Button>
           </Form.Item>
-          <div>Already a member, <Link to='/'>login here</Link></div>
+
+          <div>
+            Already a member, <Link to="/">login here</Link>
+          </div>
         </Form>
       </div>
     );

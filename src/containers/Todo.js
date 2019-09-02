@@ -1,15 +1,24 @@
 import React, { Component } from "react";
 import ShowTodos from "./ShowTodos";
 import AddTodo from "./AddTodo";
+import axios from "axios";
 import "../styles/todo.css";
 
 class Todo extends Component {
   state = {
-    todos: [
-      { id: "1", content: "Water the plants.", editing: false },
-      { id: "2", content: "Have some coffee.", editing: false }
-    ]
+    todos: []
   };
+
+  componentDidMount() {
+    const todo = axios
+      .get("https://node-task-manager-app.herokuapp.com/api/tasks")
+      .then(response =>
+        this.setState({
+          todos: response.data.map(t => t)
+        })
+      )
+      .catch(er => er);
+  }
 
   deleteTodo = t => {
     const todos = this.state.todos.filter(todo => todo.id !== t.id);
@@ -20,10 +29,18 @@ class Todo extends Component {
 
   addTodo = todo => {
     todo.id = Math.random();
-    const todos = [...this.state.todos, todo];
-    this.setState({
-      todos
-    });
+    axios
+      .post("https://node-task-manager-app.herokuapp.com/api/tasks", {
+        description: todo.content
+      })
+      .then(response => {
+        console.log({ response });
+      });
+
+    // const todos = [...this.state.todos, response.data];
+    // this.setState({
+    //   todos
+    // });
   };
 
   updateTodo = (currentTodo, content) => {

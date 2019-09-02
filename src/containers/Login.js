@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { setAuthToken } from "../utils";
 import "../styles/login.css";
 import { Form, Input, Icon, Button } from "antd";
 const FormItem = Form.Item;
@@ -12,9 +14,22 @@ class LoginForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        axios
+          .post(
+            "https://node-task-manager-app.herokuapp.com/api/users/login",
+            values
+          )
+          .then(response => {
+            localStorage.setItem("JWT_token", response.data.token);
+            setAuthToken(response.data.token);
+            this.props.history.push("/todo");
+          })
+          .catch(err => {
+            console.log({ err });
+          });
       }
     });
   };
@@ -26,21 +41,26 @@ class LoginForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           <h1>Login</h1>
           <FormItem>
-            {getFieldDecorator("userName", {
+            {getFieldDecorator("email", {
               rules: [
-                { required: true, message: "Please input your username!" }
+                {
+                  type: "email",
+                  message: "The input is not valid E-mail!"
+                },
+                {
+                  required: true,
+                  message: "Please input your E-mail!"
+                }
               ]
             })(
-              <Input
-                addonBefore={<Icon type="user" />}
-                placeholder="Username"
-              />
+              <Input addonBefore={<Icon type="user" />} placeholder="Email" />
             )}
           </FormItem>
           <FormItem>
             {getFieldDecorator("password", {
               rules: [
-                { required: true, message: "Please input your Password!" }
+                { required: true, message: "Please input your Password!" },
+                { min: 8, message: "Password must be above 8 words" }
               ]
             })(
               <Input

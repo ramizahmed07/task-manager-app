@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Login from './components/Login';
-import RegistrationForm from './components/Signup';
-import Todo from './components/Todo';
+import React, { Component } from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppContainer from "./containers/AppContainer";
 
 class App extends Component {
   render() {
-      return (
+    return (
       <div className="container-bg">
-        <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/signup" component={RegistrationForm} />
-          <Route path="/todo" component={Todo} />
-        </Switch>
+        <BrowserRouter>
+          <AppContainer />
+        </BrowserRouter>
       </div>
     );
-  }  
+  }
 }
 
 export default App;

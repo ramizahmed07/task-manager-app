@@ -51,8 +51,7 @@ class AddTodo extends Component {
           title="Add a todo"
           visible={this.state.visible}
           onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
+          onCancel={this.handleCancel}>
           <form onSubmit={this.handleSubmit}>
             <Input
               autoFocus

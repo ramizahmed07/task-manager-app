@@ -46,19 +46,16 @@ class ShowTodos extends Component {
               <div className="button-container">
                 <button
                   onClick={() => this.handleEditing(todo)}
-                  className="edit-button"
-                >
+                  className="edit-button">
                   <i className="edit-icon icon ion-md-create"></i>
                 </button>
                 <button
                   onClick={() => this.props.onDelete(todo)}
-                  className="delete-button"
-                >
+                  className="delete-button">
                   <i className="delete-icon icon ion-md-trash"></i>
                 </button>
               </div>
-            ]}
-          >
+            ]}>
             {editing && currentTodo === todo.id ? (
               <form onSubmit={this.handleSubmit} className="content-container">
                 <input
@@ -70,7 +67,7 @@ class ShowTodos extends Component {
                 />
               </form>
             ) : (
-              <div className="content-container">{todo.content}</div>
+              <div className="content-container">{todo.description}</div>
             )}
           </List.Item>
         )}
