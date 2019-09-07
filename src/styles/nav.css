@@ -1,0 +1,23 @@
+#components-layout-demo-top .logo {
+    width: 120px;
+    height: 31px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+}
+
+.header{
+    width: 100%;
+    position: relative;
+}
+
+.nav-links{
+    position: absolute;
+    right: 30px;
+}
+
+.logo{
+    position: absolute;
+    color: rgb(255, 255, 255);
+    left: 10px;
+}

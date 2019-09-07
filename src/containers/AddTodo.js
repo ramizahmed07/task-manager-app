@@ -43,7 +43,7 @@ class AddTodo extends Component {
   render() {
     return (
       <div className="add-button">
-        <Button type="primary" onClick={this.showModal}>
+        <Button style={{marginBottom: "20px"}} type="primary" onClick={this.showModal}>
           Add
         </Button>
 

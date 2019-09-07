@@ -24,8 +24,7 @@ class LoginForm extends Component {
           )
           .then(response => {
             localStorage.setItem("JWT_token", response.data.token);
-            setAuthToken(response.data.token);
-            this.props.history.push("/todo");
+            window.location = '/todo'
           })
           .catch(err => {
             console.log({ err });
