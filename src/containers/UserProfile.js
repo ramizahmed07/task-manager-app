@@ -6,7 +6,8 @@ import { base64StringToBlob } from 'blob-util';
 class UserProfile extends Component {
   state = {
     file: null,
-    getImage: ''
+    getImage: '',
+    b64Data: null,
   };
 
   componentDidMount() {
@@ -14,8 +15,9 @@ class UserProfile extends Component {
     axios.get('https://node-task-manager-app.herokuapp.com/api/users/me/avatar')
     .then(response => {
       const b64Data = response.data;
-      const blobb = base64StringToBlob(b64Data, contentType);
-      console.log(blobb)
+      // const blobb = base64StringToBlob(b64Data, contentType);
+      this.setState({ b64Data });
+      console.log(b64Data)
     })
 
   
@@ -43,7 +45,7 @@ class UserProfile extends Component {
   render() {
     return (
       <div className="user-container">
-        <div><img src={this.state.getImage} /></div>
+        <div>{this.state.b64Data && <img style={{ backgroundColor: 'red', width: 300, height: 300 }} src={`data:image/jpeg;base64,${this.state.b64Data}`} />}</div>
         <input type="file" name="file" onChange={this.handleFile} />
         <button onClick={this.handleUpload}>Upload</button>
       </div>

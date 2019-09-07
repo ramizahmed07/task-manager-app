@@ -33,6 +33,7 @@ class ShowTodos extends Component {
   };
 
   render() {
+    const { showCompleted = false } = this.props;
     const { editing, currentTodo } = this.state;
     
     const todoList = (
@@ -42,13 +43,22 @@ class ShowTodos extends Component {
         dataSource={this.props.todos}
         renderItem={todo => (
           <List.Item
-            actions={[
+            actions={!showCompleted ? [
               <div className="button-container">
                 <button
                   onClick={() => this.handleEditing(todo)}
                   className="edit-button">
                   <i className="edit-icon icon ion-md-create"></i>
                 </button>
+                <button
+                  onClick={() => this.props.onDelete(todo._id)}
+                  className="delete-button">
+                  <i className="delete-icon icon ion-md-trash"></i>
+                </button>
+              </div>
+            ] : [
+              <div className="button-container">
+                <button style={{ visibility: 'hidden'}} disabled></button>
                 <button
                   onClick={() => this.props.onDelete(todo._id)}
                   className="delete-button">

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { setAuthToken } from "../utils";
 import "../styles/login.css";
 import { Form, Input, Icon, Button } from "antd";
 const FormItem = Form.Item;

@@ -4,7 +4,6 @@ import Login from "../Login";
 import RegistrationForm from "../Signup";
 import axios from 'axios';
 import Todo from "../Todo";
-import CompletedTodo from "../CompletedTodo";
 import UserProfile from "../UserProfile";
 import { setAuthToken } from "../../utils";
 import { Layout, Menu  } from "antd";
@@ -61,12 +60,6 @@ class AppContainer extends Component {
               path="/user" 
               render={props => {
                   if(!localStorage.JWT_token) return <Redirect to="/" />; return <UserProfile />
-                  }}
-              />
-              <Route 
-                path="/completed" 
-                render={props => {
-                  if(!localStorage.JWT_token) return <Redirect to="/" />; return <CompletedTodo />
                   }}
               />
             </Switch>

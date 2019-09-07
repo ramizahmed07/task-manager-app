@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
 import ShowTodos from "./ShowTodos";
-import CompletedTodo from './CompletedTodo';
 import AddTodo from "./AddTodo";
 import axios from "axios";
 import "../styles/todo.css";
@@ -75,20 +73,22 @@ class Todo extends Component {
     return (
       <div className="todo-container">
         <h3 className="heading">
-          <Link className="todo-links" to="/todo">All</Link> <span>|</span> <Link className="todo-links" to="/completed">Completed</Link>
+          
         </h3>
         <ShowTodos
-          todos={this.state.todos}
+          todos={this.state.todos.filter(todo => todo.completed === false)}
           onDelete={this.deleteTodo}
           updateTodo={this.updateTodo}
           toggleComplete={this.toggleComplete}
         />
         <AddTodo addTodo={this.addTodo} />
-        <CompletedTodo
-          todos={this.state.todos}
-          onDelete={this.deleteTodo}    
+        <ShowTodos
+          todos={this.state.todos.filter(todo => todo.completed)}
+          onDelete={this.deleteTodo}
+          updateTodo={this.updateTodo}
+          toggleComplete={this.toggleComplete}
+          showCompleted
         />
-        
       </div>
     );
   }
