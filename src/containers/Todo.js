@@ -20,7 +20,7 @@ class Todo extends Component {
       .catch(er => er);
   }
 
-  toggleComplete = (todo) => {
+    toggleComplete = (todo) => {
     axios.patch(`https://node-task-manager-app.herokuapp.com/api/tasks/${todo._id}`, {completed: !todo.completed})
     .then(response => {
       let newTodo = response.data
