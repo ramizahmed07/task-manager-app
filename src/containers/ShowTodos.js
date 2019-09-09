@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import { List } from "antd";
-import "../styles/todo.css";
+import { List } from 'antd';
+import '../styles/todo.css';
 
 class ShowTodos extends Component {
   state = {
     editing: false,
-    currentTodo: "",
-    description: ""
+    currentTodo: '',
+    description: ''
   };
 
   handleEditing = todo => {
@@ -27,7 +27,7 @@ class ShowTodos extends Component {
     e.preventDefault();
     this.props.updateTodo(this.state);
     this.setState({
-      description: "",
+      description: '',
       editing: false
     });
   };
@@ -35,7 +35,7 @@ class ShowTodos extends Component {
   render() {
     const { showCompleted = false } = this.props;
     const { editing, currentTodo } = this.state;
-    
+
     const todoList = (
       <List
         size="small"
@@ -43,29 +43,40 @@ class ShowTodos extends Component {
         dataSource={this.props.todos}
         renderItem={todo => (
           <List.Item
-            actions={!showCompleted ? [
-              <div className="button-container">
-                <button
-                  onClick={() => this.handleEditing(todo)}
-                  className="edit-button">
-                  <i className="edit-icon icon ion-md-create"></i>
-                </button>
-                <button
-                  onClick={() => this.props.onDelete(todo._id)}
-                  className="delete-button">
-                  <i className="delete-icon icon ion-md-trash"></i>
-                </button>
-              </div>
-            ] : [
-              <div className="button-container">
-                <button style={{ visibility: 'hidden'}} disabled></button>
-                <button
-                  onClick={() => this.props.onDelete(todo._id)}
-                  className="delete-button">
-                  <i className="delete-icon icon ion-md-trash"></i>
-                </button>
-              </div>
-            ]}>
+            actions={
+              !showCompleted
+                ? [
+                    <div className="button-container">
+                      <button
+                        onClick={() => this.handleEditing(todo)}
+                        className="edit-button"
+                      >
+                        <i className="edit-icon icon ion-md-create" />
+                      </button>
+                      <button
+                        onClick={() => this.props.onDelete(todo._id)}
+                        className="delete-button"
+                      >
+                        <i className="delete-icon icon ion-md-trash" />
+                      </button>
+                    </div>
+                  ]
+                : [
+                    <div className="button-container">
+                      <button
+                        style={{ visibility: 'hidden' }}
+                        disabled
+                       />
+                      <button
+                        onClick={() => this.props.onDelete(todo._id)}
+                        className="delete-button"
+                      >
+                        <i className="delete-icon icon ion-md-trash" />
+                      </button>
+                    </div>
+                  ]
+            }
+          >
             {editing && currentTodo === todo._id ? (
               <form onSubmit={this.handleSubmit} className="content-container">
                 <input
@@ -77,9 +88,15 @@ class ShowTodos extends Component {
                 />
               </form>
             ) : (
-              <div className="content-container" style={{
-                textDecoration: (todo.completed) ? "line-through" : ""
-              }} onClick={() => this.props.toggleComplete(todo)}>{todo.description}</div>
+              <div
+                className="content-container"
+                style={{
+                  textDecoration: todo.completed ? 'line-through' : ''
+                }}
+                onClick={() => this.props.toggleComplete(todo)}
+              >
+                {todo.description}
+              </div>
             )}
           </List.Item>
         )}

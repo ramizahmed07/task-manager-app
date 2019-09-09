@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import "../styles/login.css";
-import { Form, Input, Icon, Button } from "antd";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/login.css';
+import { Form, Input, Icon, Button } from 'antd';
+
 const FormItem = Form.Item;
 
 class LoginForm extends Component {
@@ -18,12 +19,12 @@ class LoginForm extends Component {
       if (!err) {
         axios
           .post(
-            "https://node-task-manager-app.herokuapp.com/api/users/login",
+            'https://node-task-manager-app.herokuapp.com/api/users/login',
             values
           )
           .then(response => {
-            localStorage.setItem("JWT_token", response.data.token);
-            window.location = '/todo'
+            localStorage.setItem('JWT_token', response.data.token);
+            window.location = '/todo';
           })
           .catch(err => {
             console.log({ err });
@@ -39,15 +40,15 @@ class LoginForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           <h1>Login</h1>
           <FormItem>
-            {getFieldDecorator("email", {
+            {getFieldDecorator('email', {
               rules: [
                 {
-                  type: "email",
-                  message: "The input is not valid E-mail!"
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
                 },
                 {
                   required: true,
-                  message: "Please input your E-mail!"
+                  message: 'Please input your E-mail!'
                 }
               ]
             })(
@@ -55,10 +56,10 @@ class LoginForm extends Component {
             )}
           </FormItem>
           <FormItem>
-            {getFieldDecorator("password", {
+            {getFieldDecorator('password', {
               rules: [
-                { required: true, message: "Please input your Password!" },
-                { min: 8, message: "Password must be above 8 words" }
+                { required: true, message: 'Please input your Password!' },
+                { min: 8, message: 'Password must be above 8 words' }
               ]
             })(
               <Input
@@ -75,7 +76,7 @@ class LoginForm extends Component {
           </FormItem>
 
           <div className="signUp">
-            Not a member?{" "}
+            Not a member?{' '}
             <Link to="/signup" className="signUpLink">
               Sign up now
             </Link>
@@ -86,6 +87,6 @@ class LoginForm extends Component {
   }
 }
 
-const Login = Form.create({ name: "login" })(LoginForm);
+const Login = Form.create({ name: 'login' })(LoginForm);
 
 export default Login;

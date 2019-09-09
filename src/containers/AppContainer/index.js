@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter, Link, Redirect } from "react-router-dom";
+import axios from 'axios';
 import Login from "../Login";
 import RegistrationForm from "../Signup";
-import axios from 'axios';
 import Todo from "../Todo";
 import UserProfile from "../UserProfile";
 import { setAuthToken } from "../../utils";
@@ -37,34 +37,48 @@ class AppContainer extends Component {
               mode="horizontal"
               style={{ lineHeight: "64px" }}
             >
-            {(localStorage.JWT_token) ? 
-              <Menu.Item key="1"><Link to="/user">User</Link></Menu.Item>
-              : null}
+            {
+              (localStorage.JWT_token) ? 
+              <Menu.Item key="1">
+                <Link to="/user">User</Link>
+              </Menu.Item>
+              : null
+            }
               
-              {(localStorage.JWT_token) ? 
-              <Menu.Item key="2" onClick={this.logOut}><Link to="/">Log out</Link></Menu.Item>
-              : null}
+            {
+              (localStorage.JWT_token) ? 
+              <Menu.Item key="2" onClick={this.logOut}>
+                <Link to="/">Log out</Link>
+              </Menu.Item>
+              : null
+            }
             </Menu>
           </Header>
-          <Content style={{ padding: "0 50px" }}>
+          <Content style={{padding: "0 50px"}}>
             <Switch>
               <Route exact path="/" component={Login} />
               <Route path="/signup" component={RegistrationForm} />
               <Route 
                 path="/todo" 
                 render={props => {
-                  if(!localStorage.JWT_token) return <Redirect to="/" />; return <Todo />
+                  if(!localStorage.JWT_token) 
+                    return <Redirect to="/" />; 
+                    
+                    return <Todo />
                   }}
               />
               <Route 
               path="/user" 
               render={props => {
-                  if(!localStorage.JWT_token) return <Redirect to="/" />; return <UserProfile />
+                  if(!localStorage.JWT_token) 
+                    return <Redirect to="/" />; 
+                    
+                    return <UserProfile />
                   }}
               />
             </Switch>
           </Content>
-          <Footer style={{ textAlign: "center" }}>Created by Ramiz</Footer>
+          <Footer style={{textAlign: "center"}}>Created by Ramiz</Footer>
         </Layout>
       </div>
     );

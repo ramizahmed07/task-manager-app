@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Modal, Button, Input } from "antd";
-import "../styles/todo.css";
+import React, { Component } from 'react';
+import { Modal, Button, Input } from 'antd';
+import '../styles/todo.css';
 
 class AddTodo extends Component {
   state = {
-    content: ""
+    content: ''
   };
 
   handleChange = e => {
@@ -13,11 +13,11 @@ class AddTodo extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.content === "") return false;
+    if (this.state.content === '') return false;
     this.props.addTodo(this.state);
     this.setState({
       visible: false,
-      content: ""
+      content: ''
     });
   };
 
@@ -43,7 +43,11 @@ class AddTodo extends Component {
   render() {
     return (
       <div className="add-button">
-        <Button style={{marginBottom: "20px"}} type="primary" onClick={this.showModal}>
+        <Button
+          style={{ marginBottom: '20px' }}
+          type="primary"
+          onClick={this.showModal}
+        >
           Add
         </Button>
 
@@ -51,7 +55,8 @@ class AddTodo extends Component {
           title="Add a todo"
           visible={this.state.visible}
           onOk={this.handleOk}
-          onCancel={this.handleCancel}>
+          onCancel={this.handleCancel}
+        >
           <form onSubmit={this.handleSubmit}>
             <Input
               autoFocus

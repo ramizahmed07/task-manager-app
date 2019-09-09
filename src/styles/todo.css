@@ -1,88 +1,85 @@
-.todo-container{
-    width: 85%;
-    margin: 0 auto;
+.todo-container {
+  width: 85%;
+  margin: 0 auto;
 }
 
-.todo-container h3{
-    text-align: center;
-    margin: 30px 0;
-    font-family: sans-serif;
+.todo-container h3 {
+  text-align: center;
+  margin: 30px 0;
+  font-family: sans-serif;
 }
 
-.todo-links{
-    letter-spacing: 2px;
-    margin: 0 10px;
+.todo-links {
+  letter-spacing: 2px;
+  margin: 0 10px;
 }
 
-.add-button{
-    margin-top: 30px;
-    text-align: center
+.add-button {
+  margin-top: 30px;
+  text-align: center;
 }
 
-.content-container{
-    min-width: 85%;
+.content-container {
+  min-width: 85%;
 }
 
-.button-container{
-    min-width: 15%;
+.button-container {
+  min-width: 15%;
 }
-.update-input{
-    border: 1px solid #d2d2d2;
-    padding: 0 5px;
-}
-
-.edit-button, .delete-button{
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    
+.update-input {
+  border: 1px solid #d2d2d2;
+  padding: 0 5px;
 }
 
-.edit-icon, .delete-icon{
-    font-size: 20px;
+.edit-button,
+.delete-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
-.delete-icon{
-    color: red;
+.edit-icon,
+.delete-icon {
+  font-size: 20px;
 }
 
-.edit-icon{
-    color: green;
+.delete-icon {
+  color: red;
 }
 
-
+.edit-icon {
+  color: green;
+}
 
 /* ------- MEDIA QUERIES ------ */
 
+@media only screen and (min-device-width: 320px) and (max-device-width: 600px) {
+  .todo-container {
+    width: 70%;
+  }
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 600px) {
-    
-    .todo-container{
-        width: 70%;
-    }
+  .todo-container h1 {
+    font-size: 30px;
+  }
 
-    .todo-container h1{
-        font-size: 30px;
-    }
+  .content-container {
+    max-width: 80%;
+    font-size: 12px;
+  }
 
-    .content-container{
-        max-width: 80%;
-        font-size: 12px;
-    }
-
-    .edit-icon, .delete-icon{
-        font-size: 13px;
-    }
+  .edit-icon,
+  .delete-icon {
+    font-size: 13px;
+  }
 }
 
-@media only screen and (min-device-width : 1000px) {
-    
-    .content-container{
-        min-width: 89%;
-        font-size: 12px;
-    }
+@media only screen and (min-device-width: 1000px) {
+  .content-container {
+    min-width: 89%;
+    font-size: 12px;
+  }
 
-    .button-container{
-        min-width: 10%;
-    }
+  .button-container {
+    min-width: 10%;
+  }
 }

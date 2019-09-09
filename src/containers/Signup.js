@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { setAuthToken } from "../utils";
-import "../styles/signup.css";
-import { Form, Input, InputNumber, Button } from "antd";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { setAuthToken } from '../utils';
+import '../styles/signup.css';
+import { Form, Input, InputNumber, Button } from 'antd';
 
 class RegistrationForm extends Component {
   state = {
@@ -15,11 +15,11 @@ class RegistrationForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         axios
-          .post("https://node-task-manager-app.herokuapp.com/api/users", values)
+          .post('https://node-task-manager-app.herokuapp.com/api/users', values)
           .then(response => {
-            localStorage.setItem("JWT_token", response.data.token);
+            localStorage.setItem('JWT_token', response.data.token);
             setAuthToken(response.data.token);
-            this.props.history.push("/todo");
+            this.props.history.push('/todo');
           })
           .catch(err => {
             console.log({ err });
@@ -35,8 +35,8 @@ class RegistrationForm extends Component {
 
   compareToFirstPassword = (rule, value, callback) => {
     const { form } = this.props;
-    if (value && value !== form.getFieldValue("password")) {
-      callback("Two passwords that you enter is inconsistent!");
+    if (value && value !== form.getFieldValue('password')) {
+      callback('Two passwords that you enter is inconsistent!');
     } else {
       callback();
     }
@@ -45,7 +45,7 @@ class RegistrationForm extends Component {
   validateToNextPassword = (rule, value, callback) => {
     const { form } = this.props;
     if (value && this.state.confirmDirty) {
-      form.validateFields(["confirm"], { force: true });
+      form.validateFields(['confirm'], { force: true });
     }
     callback();
   };
@@ -83,52 +83,52 @@ class RegistrationForm extends Component {
           <h1>Sign Up</h1>
 
           <Form.Item label="Name: " hasFeedback>
-            {getFieldDecorator("name", {
+            {getFieldDecorator('name', {
               rules: [
                 {
                   required: true,
-                  message: "Please input your Name"
+                  message: 'Please input your Name'
                 }
               ]
             })(<Input />)}
           </Form.Item>
 
           <Form.Item label="E-mail" hasFeedback>
-            {getFieldDecorator("email", {
+            {getFieldDecorator('email', {
               rules: [
                 {
-                  type: "email",
-                  message: "The input is not valid E-mail!"
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
                 },
                 {
                   required: true,
-                  message: "Please input your E-mail!"
+                  message: 'Please input your E-mail!'
                 }
               ]
             })(<Input />)}
           </Form.Item>
 
           <Form.Item label="Password" hasFeedback>
-            {getFieldDecorator("password", {
+            {getFieldDecorator('password', {
               rules: [
                 {
                   required: true,
-                  message: "Please input your password!"
+                  message: 'Please input your password!'
                 },
                 {
                   validator: this.validateToNextPassword
                 },
-                { min: 8, message: "Password must be above 8 words" }
+                { min: 8, message: 'Password must be above 8 words' }
               ]
             })(<Input.Password />)}
           </Form.Item>
 
           <Form.Item label="Confirm: " hasFeedback>
-            {getFieldDecorator("confirm", {
+            {getFieldDecorator('confirm', {
               rules: [
                 {
                   required: true,
-                  message: "Please confirm your password!"
+                  message: 'Please confirm your password!'
                 },
                 {
                   validator: this.compareToFirstPassword
@@ -138,11 +138,11 @@ class RegistrationForm extends Component {
           </Form.Item>
 
           <Form.Item label="Age: ">
-            {getFieldDecorator("age", {
+            {getFieldDecorator('age', {
               rules: [
                 {
                   required: true,
-                  message: "Please input your Age"
+                  message: 'Please input your Age'
                 }
               ]
             })(<InputNumber min={0} />)}
@@ -163,7 +163,7 @@ class RegistrationForm extends Component {
   }
 }
 
-const WrappedRegistrationForm = Form.create({ name: "register" })(
+const WrappedRegistrationForm = Form.create({ name: 'register' })(
   RegistrationForm
 );
 
