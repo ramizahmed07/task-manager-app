@@ -10,7 +10,7 @@ class UserProfile extends Component {
   };
 
   componentDidMount() {
-    const contentType = 'image/png';
+    // const contentType = 'image/png';
     axios
       .get('https://node-task-manager-app.herokuapp.com/api/users/me/avatar')
       .then(response => {
@@ -28,8 +28,8 @@ class UserProfile extends Component {
     this.setState({ file });
   };
 
-  handleUpload = e => {
-    const {file} = this.state;
+  handleUpload = () => {
+    const { file } = this.state;
     const formdata = new FormData();
     formdata.append('avatar', file);
     axios

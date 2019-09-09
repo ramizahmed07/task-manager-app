@@ -1,12 +1,6 @@
 .todo-container {
   width: 85%;
-  margin: 0 auto;
-}
-
-.todo-container h3 {
-  text-align: center;
-  margin: 30px 0;
-  font-family: sans-serif;
+  margin: 40px auto;
 }
 
 .todo-links {

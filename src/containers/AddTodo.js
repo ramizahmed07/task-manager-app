@@ -13,9 +13,11 @@ class AddTodo extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.content === '') return false;
-    this.props.addTodo(this.state);
-    this.setState({
+    const { addTodo } = this.props;
+    const { content } = this.state;
+    if (content === '') return false;
+    addTodo(this.state);
+    return this.setState({
       visible: false,
       content: ''
     });
@@ -34,13 +36,14 @@ class AddTodo extends Component {
     });
   };
 
-  handleCancel = e => {
+  handleCancel = () => {
     this.setState({
       visible: false
     });
   };
 
   render() {
+    const { content, visible } = this.state;
     return (
       <div className="add-button">
         <Button
@@ -53,16 +56,12 @@ class AddTodo extends Component {
 
         <Modal
           title="Add a todo"
-          visible={this.state.visible}
+          visible={visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
           <form onSubmit={this.handleSubmit}>
-            <Input
-              autoFocus
-              onChange={this.handleChange}
-              value={this.state.content}
-            />
+            <Input autoFocus onChange={this.handleChange} value={content} />
           </form>
         </Modal>
       </div>

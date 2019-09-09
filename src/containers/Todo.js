@@ -27,12 +27,14 @@ class Todo extends Component {
         { completed: !todo.completed }
       )
       .then(response => {
+        const { todos } = this.state;
+
         const newTodo = response.data;
-        const todos = [...this.state.todos];
-        const index = todos.findIndex(t => t._id === response.data._id);
-        todos.splice(index, 1, { ...this.state.todos, ...newTodo });
+        const todoList = [...todos];
+        const index = todoList.findIndex(t => t._id === response.data._id);
+        todoList.splice(index, 1, { ...todos, ...newTodo });
         this.setState({
-          todos
+          todos: todoList
         });
       })
       .catch(er => console.log({ er }));
@@ -42,8 +44,9 @@ class Todo extends Component {
     axios
       .delete(`https://node-task-manager-app.herokuapp.com/api/tasks/${t}`)
       .then(response => {
-        const todos = [...this.state.todos].filter(res => res._id !== t);
-        this.setState({ todos });
+        const { todos } = this.state;
+        const todoList = [...todos].filter(res => res._id !== t);
+        this.setState({ todos: todoList });
       })
       .catch(er => console.log(er));
   };
@@ -55,8 +58,9 @@ class Todo extends Component {
         description: todo.content
       })
       .then(response => {
-        const todos = [...this.state.todos, response.data];
-        this.setState({ todos });
+        const { todos } = this.state;
+        const todoList = [...todos, response.data];
+        this.setState({ todos: todoList });
       });
   };
 
@@ -68,29 +72,30 @@ class Todo extends Component {
       )
       .then(response => {
         const newTodo = response.data;
-        const todos = [...this.state.todos];
-        const index = todos.findIndex(t => t._id === response.data._id);
-        todos.splice(index, 1, { ...this.state.todos, ...newTodo });
+        const { todos } = this.state;
+        const todoList = [...todos];
+        const index = todoList.findIndex(t => t._id === response.data._id);
+        todoList.splice(index, 1, { ...todos, ...newTodo });
         this.setState({
-          todos
+          todos: todoList
         });
       })
       .catch(er => console.log({ er }));
   };
 
   render() {
+    const { todos } = this.state;
     return (
       <div className="todo-container">
-        <h3 className="heading" />
         <ShowTodos
-          todos={this.state.todos.filter(todo => todo.completed === false)}
+          todos={todos.filter(todo => todo.completed === false)}
           onDelete={this.deleteTodo}
           updateTodo={this.updateTodo}
           toggleComplete={this.toggleComplete}
         />
         <AddTodo addTodo={this.addTodo} />
         <ShowTodos
-          todos={this.state.todos.filter(todo => todo.completed)}
+          todos={todos.filter(todo => todo.completed)}
           onDelete={this.deleteTodo}
           updateTodo={this.updateTodo}
           toggleComplete={this.toggleComplete}

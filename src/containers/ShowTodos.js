@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { Component } from 'react';
 
 import { List } from 'antd';
@@ -25,7 +26,8 @@ class ShowTodos extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.updateTodo(this.state);
+    const { updateTodo } = this.props;
+    updateTodo(this.state);
     this.setState({
       description: '',
       editing: false
@@ -33,14 +35,19 @@ class ShowTodos extends Component {
   };
 
   render() {
-    const { showCompleted = false } = this.props;
-    const { editing, currentTodo } = this.state;
+    const {
+      showCompleted = false,
+      todos,
+      onDelete,
+      toggleComplete
+    } = this.props;
+    const { editing, currentTodo, description } = this.state;
 
     const todoList = (
       <List
         size="small"
         bordered
-        dataSource={this.props.todos}
+        dataSource={todos}
         renderItem={todo => (
           <List.Item
             actions={
@@ -54,7 +61,7 @@ class ShowTodos extends Component {
                         <i className="edit-icon icon ion-md-create" />
                       </button>
                       <button
-                        onClick={() => this.props.onDelete(todo._id)}
+                        onClick={() => onDelete(todo._id)}
                         className="delete-button"
                       >
                         <i className="delete-icon icon ion-md-trash" />
@@ -63,12 +70,9 @@ class ShowTodos extends Component {
                   ]
                 : [
                     <div className="button-container">
+                      <button style={{ visibility: 'hidden' }} disabled />
                       <button
-                        style={{ visibility: 'hidden' }}
-                        disabled
-                       />
-                      <button
-                        onClick={() => this.props.onDelete(todo._id)}
+                        onClick={() => onDelete(todo._id)}
                         className="delete-button"
                       >
                         <i className="delete-icon icon ion-md-trash" />
@@ -83,7 +87,7 @@ class ShowTodos extends Component {
                   autoFocus
                   onChange={this.handleChange}
                   type="text"
-                  value={this.state.description}
+                  value={description}
                   className="update-input"
                 />
               </form>
@@ -93,7 +97,7 @@ class ShowTodos extends Component {
                 style={{
                   textDecoration: todo.completed ? 'line-through' : ''
                 }}
-                onClick={() => this.props.toggleComplete(todo)}
+                onClick={() => toggleComplete(todo)}
               >
                 {todo.description}
               </div>

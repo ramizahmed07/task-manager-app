@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/login.css';
 import { Form, Input, Icon, Button } from 'antd';
+import { Link } from 'react-router-dom';
+import '../styles/login.css';
 
 const FormItem = Form.Item;
 
@@ -13,9 +13,10 @@ class LoginForm extends Component {
   };
 
   handleSubmit = e => {
+    const { form } = this.props;
     e.preventDefault();
 
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         axios
           .post(
@@ -26,15 +27,16 @@ class LoginForm extends Component {
             localStorage.setItem('JWT_token', response.data.token);
             window.location = '/todo';
           })
-          .catch(err => {
-            console.log({ err });
+          .catch(errr => {
+            console.log({ errr });
           });
       }
     });
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
     return (
       <div className="container">
         <Form onSubmit={this.handleSubmit}>

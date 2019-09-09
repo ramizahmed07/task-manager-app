@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Form, Input, InputNumber, Button } from 'antd';
 import { setAuthToken } from '../utils';
 import '../styles/signup.css';
-import { Form, Input, InputNumber, Button } from 'antd';
 
 class RegistrationForm extends Component {
   state = {
@@ -12,17 +12,18 @@ class RegistrationForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err, values) => {
+    const { form, history } = this.props;
+    form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         axios
           .post('https://node-task-manager-app.herokuapp.com/api/users', values)
           .then(response => {
             localStorage.setItem('JWT_token', response.data.token);
             setAuthToken(response.data.token);
-            this.props.history.push('/todo');
+            history.push('/todo');
           })
-          .catch(err => {
-            console.log({ err });
+          .catch(errr => {
+            console.log({ errr });
           });
       }
     });
@@ -30,10 +31,11 @@ class RegistrationForm extends Component {
 
   handleConfirmBlur = e => {
     const { value } = e.target;
-    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    const { confirmDirty } = this.state;
+    this.setState({ confirmDirty: confirmDirty || !!value });
   };
 
-  compareToFirstPassword = (rule, value, callback) => {
+  compareToFirstPassword = (value, callback) => {
     const { form } = this.props;
     if (value && value !== form.getFieldValue('password')) {
       callback('Two passwords that you enter is inconsistent!');
@@ -42,16 +44,18 @@ class RegistrationForm extends Component {
     }
   };
 
-  validateToNextPassword = (rule, value, callback) => {
+  validateToNextPassword = (value, callback) => {
     const { form } = this.props;
-    if (value && this.state.confirmDirty) {
+    const { confirmDirty } = this.state;
+    if (value && confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
     callback();
   };
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { form } = this.props;
+    const { getFieldDecorator } = form;
 
     const formItemLayout = {
       labelCol: {
