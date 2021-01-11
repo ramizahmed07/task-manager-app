@@ -44,7 +44,7 @@ class AddTodo extends Component {
     return (
       <div className="add-button">
         <Button style={{marginBottom: "20px"}} type="primary" onClick={this.showModal}>
-          Add
+          Add Todo
         </Button>
 
         <Modal
